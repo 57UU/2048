@@ -3,6 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="_2048.Block">
     <Frame x:Name="frame" CornerRadius="4" BorderColor="Black"  >
-        <Label x:Name="lable" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <Label x:Name="lable" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"/>
     </Frame>
 </ContentView>

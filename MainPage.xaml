@@ -4,13 +4,14 @@
              x:Class="_2048.MainPage">
 
     <VerticalStackLayout>
-        <Label x:Name="score" Text="????" HorizontalOptions="Center" />
+        <Label x:Name="score" Text="????" HorizontalOptions="Center" FontSize="Large"/>
         <Grid x:Name="graph" HorizontalOptions="Center">
             
             
         </Grid>
         <VerticalStackLayout x:Name="childLayout">
-            <Entry x:Name="entry" Placeholder="Focus to Type" BackgroundColor="Gold" HorizontalOptions="CenterAndExpand"/>
+            <Label HorizontalOptions="Center" x:Name="max"/>
+            <Entry x:Name="entry" Placeholder="Focus to Type" BackgroundColor="Gold" />
             <Button Text="Replay" Clicked="Button_Clicked"/>
         </VerticalStackLayout>
         

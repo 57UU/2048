@@ -62,6 +62,8 @@ public class Core2048
     }
     public void move(Direction direction)
     {
+        bool isMoveable = false;
+       
         if (direction == Direction.down)
         {
             
@@ -69,6 +71,7 @@ public class Core2048
             {
                 int value = 0;
                 int index=0;
+                bool seemCanMove = false;
                 for (int row = rowMax - 1; row > -1; row--)
                 {
                     int i = get(row, column);
@@ -94,7 +97,8 @@ public class Core2048
                         clean(row, column);
                     }
                 }
-                List<int> ints = new(); ;
+                List<int> ints = new(); 
+                
                 for (int row = rowMax-1; row >-1; row--)
                 {
                     
@@ -102,9 +106,18 @@ public class Core2048
                     if (i!= 0)
                     {
                         ints.Add(i);
+                        if (seemCanMove)
+                        {
+                            isMoveable = true;
+                        }
+                    }
+                    else
+                    {
+                        seemCanMove = true;
                     }
                     
                 }
+                
                 for(int row = rowMax - 1; row > -1; row--)
                 {
                     int ListIndex = rowMax - row-1;
@@ -124,6 +137,7 @@ public class Core2048
             {
                 int value = 0;
                 int index = 0;
+                bool seemCanMove = false;
                 for (int row = 0; row < rowMax; row++)
                 {
                     int i = get(row, column);
@@ -155,9 +169,18 @@ public class Core2048
                     if (i != 0)
                     {
                         ints.Add(i);
+                        if (seemCanMove)
+                        {
+                            isMoveable = true;
+                        }
+                    }
+                    else
+                    {
+                        seemCanMove= true;
                     }
 
                 }
+                
                 for (int row = 0; row < rowMax; row++)
                 {
 
@@ -177,6 +200,7 @@ public class Core2048
             {
                 int value = 0;
                 int index = 0;
+                bool seemCanMove = false;
                 for (int column = 0; column < columnMax; column++)
                 {
                     int i = get(row, column);
@@ -207,9 +231,18 @@ public class Core2048
                     if (i != 0)
                     {
                         ints.Add(i);
+                        if (seemCanMove)
+                        {
+                            isMoveable = true;
+                        }
+                    }
+                    else
+                    {
+                        seemCanMove = true;
                     }
                 }
-                for(int column = 0; column < columnMax; column++)
+                
+                for (int column = 0; column < columnMax; column++)
                 {
                     if (column < ints.Count)
                     {
@@ -228,6 +261,7 @@ public class Core2048
             {
                 int value = 0;
                 int index = 0;
+                bool seemCanMove = false;
                 for (int column = columnMax-1; column >-1; column--)
                 {
                     int i = get(row, column);
@@ -258,6 +292,14 @@ public class Core2048
                     if (i != 0)
                     {
                         ints.Add(i);
+                        if (seemCanMove)
+                        {
+                            isMoveable= true;
+                        }
+                    }
+                    else
+                    {
+                        seemCanMove = true;
                     }
                 }
                 for (int column =columnMax-1; column >-1; column--)
@@ -274,6 +316,11 @@ public class Core2048
                 }
             }
         }//direction
+        if (!isMoveable)
+        {
+            draw();
+            return;
+        }
         GenerateRandom();
         draw();
     }//move()

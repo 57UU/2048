@@ -9,7 +9,8 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-
+		maxScores = Preferences.Default.Get(key,0);
+		setRecode();
 		core = new(rowMax, columnMax,draw);
         for (int i=0; i < rowMax; i++)
 		{
@@ -105,7 +106,7 @@ public partial class MainPage : ContentPage
 		}
 	}
 
-	private void draw()
+	private async void draw()
 	{
 		graph.Children.Clear();
 		score.Text = "Scores:"+core.getScore();
@@ -126,7 +127,25 @@ public partial class MainPage : ContentPage
 		}
 		if (core.isDead())
 		{
-			DisplayAlert("O", "YOU DEAD", "OK");
+			await DisplayAlert("O", "YOU DEAD", "OK");
+			recode();
+		}
+	}
+	const string key = "scores";
+	int maxScores;
+	void setRecode()
+	{
+		max.Text = $"Highest:{maxScores.ToString()}";
+	}
+	private async void recode()
+	{
+		if(core.getScore() > maxScores)
+		{
+			maxScores = core.getScore();
+			setRecode();
+			await DisplayAlert("congratulation","New Recode!","Great");
+			Preferences.Default.Set(key, maxScores);
+			
 		}
 	}
 
