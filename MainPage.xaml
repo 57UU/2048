@@ -4,11 +4,16 @@
              x:Class="_2048.MainPage">
 
     <VerticalStackLayout>
-        <Label x:Name="score" Text="????" HorizontalOptions="Center"/>
-        <Grid x:Name="graph">
+        <Label x:Name="score" Text="????" HorizontalOptions="Center" />
+        <Grid x:Name="graph" HorizontalOptions="Center">
             
             
         </Grid>
+        <VerticalStackLayout x:Name="childLayout">
+            <Entry x:Name="entry" Placeholder="Focus to Type" BackgroundColor="Gold" HorizontalOptions="CenterAndExpand"/>
+            <Button Text="Replay" Clicked="Button_Clicked"/>
+        </VerticalStackLayout>
+        
     </VerticalStackLayout>
 
 </ContentPage>

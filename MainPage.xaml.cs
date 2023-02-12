@@ -19,7 +19,7 @@ public partial class MainPage : ContentPage
 		{
 			graph.ColumnDefinitions.Add(new ColumnDefinition() {  });
 		}
-		this.Loaded += (s, e) => { reSize(); };
+		//this.Loaded += (s, e) => { reSize(); };
 		this.SizeChanged += (o, s) => { reSize(); };
 		SwipeGestureRecognizer _left=new SwipeGestureRecognizer() { Direction=SwipeDirection.Left};
         SwipeGestureRecognizer _right = new SwipeGestureRecognizer() { Direction = SwipeDirection.Right };
@@ -33,8 +33,32 @@ public partial class MainPage : ContentPage
 		graph.GestureRecognizers.Add(_left);
 		graph.GestureRecognizers.Add(_right);
 		graph.GestureRecognizers.Add(_up);
+		//autoResize();
 
 		draw();
+		reSize();
+		entry.TextChanged += (o, e) => {
+			if (e.NewTextValue == "")
+			{
+				return;
+			}
+			if (e.NewTextValue == "w")
+			{
+				up();
+			}else if(e.NewTextValue == "a")
+			{
+				left();
+			}else if (e.NewTextValue == "s")
+			{
+				down();
+			}
+			else if(e.NewTextValue=="d")
+			{
+				right();
+			}
+			entry.Text = "";
+		};
+		entry.Focus();
     }
 	void left()
 	{
@@ -52,18 +76,32 @@ public partial class MainPage : ContentPage
 	{
 		core.move(Direction.down);
 	}
-	void reSize()
+	async void autoResize()
+	{
+		while(true)
+		{
+			await Task.Delay(1000);
+			reSize();
+		}
+	}
+	async void reSize()
 	{
 		double w = Width / columnMax;
-		double h = Height / rowMax;
+		double h = (Height-score.Height-childLayout.Height) / rowMax;
 		double r=Math.Min(w,h);
+		if (r < 1)
+		{
+			await Task.Delay(100);
+			reSize();
+			return;
+		}
 		foreach(var i in graph.RowDefinitions)
 		{
 			i.Height = r;
 		}
 		foreach(var i in graph.ColumnDefinitions)
 		{
-			i.Width = w;
+			i.Width = r;
 		}
 	}
 
@@ -92,5 +130,9 @@ public partial class MainPage : ContentPage
 		}
 	}
 
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+		core.replay();
+    }
 }
 

@@ -27,6 +27,13 @@ public class Core2048
         GenerateRandom();
         GenerateRandom();
     }
+    public void replay()
+    {
+        graph = new int[rowMax, columnMax];
+        GenerateRandom();
+        GenerateRandom();
+        draw();
+    }
     private Random random = new();
     public int getScore()
     {
@@ -45,6 +52,10 @@ public class Core2048
                 }
             }
         }
+        if (points.Count == 0)
+        {
+            return;
+        }
         int index = (int)(random.NextDouble()*points.Count);
         var p = points[index];
         set(p.x, p.y,intBlock());
@@ -58,7 +69,7 @@ public class Core2048
             {
                 int value = 0;
                 int index=0;
-                for (int row = rowMax - 1; row > 0; row--)
+                for (int row = rowMax - 1; row > -1; row--)
                 {
                     int i = get(row, column);
                     if (i == 0)
@@ -69,6 +80,8 @@ public class Core2048
                     {
                         value = i;
                     }*/
+                    
+
                     if (value != i)
                     {
                         value = i;
@@ -164,7 +177,7 @@ public class Core2048
             {
                 int value = 0;
                 int index = 0;
-                for (int column = 0; column < columnMax-1; column++)
+                for (int column = 0; column < columnMax; column++)
                 {
                     int i = get(row, column);
                     if (i == 0)
@@ -215,7 +228,7 @@ public class Core2048
             {
                 int value = 0;
                 int index = 0;
-                for (int column = columnMax-1; column >0; column--)
+                for (int column = columnMax-1; column >-1; column--)
                 {
                     int i = get(row, column);
                     if (i == 0)
@@ -276,7 +289,7 @@ public class Core2048
                 {
                     return false;
                 }
-                if (value == 0 && i != 0)
+                if (value == 0 )
                 {
                     value = i;
                     continue;
@@ -291,7 +304,7 @@ public class Core2048
         for (int row = 0; row < rowMax; row++)
         {
             int value=0 ;
-            for (int column = 0; column < columnMax - 1; column++)
+            for (int column = 0; column < columnMax ; column++)
             {
                 int i = get(row, column);
                 if (i == 0)
