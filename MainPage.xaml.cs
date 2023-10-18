@@ -152,6 +152,18 @@ public partial class MainPage : ContentPage
     private void Button_Clicked(object sender, EventArgs e)
     {
 		core.replay();
+
+    }
+
+    private async void Button_Clicked_1(object sender, EventArgs e)
+    {
+		var result = await DisplayActionSheet("Are you sure?", null,null, new string[]{"Yes","no"});
+		if(result == "Yes")
+		{
+            Preferences.Default.Set(key, 0);
+        }
+		maxScores = 0;
+        setRecode();
     }
 }
 

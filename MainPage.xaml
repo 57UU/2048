@@ -12,7 +12,12 @@
         <VerticalStackLayout x:Name="childLayout">
             <Label HorizontalOptions="Center" x:Name="max"/>
             <Entry x:Name="entry" Placeholder="Focus to Type" BackgroundColor="Gold" />
-            <Button Text="Replay" Clicked="Button_Clicked"/>
+            
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                <Button HorizontalOptions="CenterAndExpand"  Text="——————Replay——————" Clicked="Button_Clicked"/>
+                <Button  HorizontalOptions="End" Text="Reset Max Score" Clicked="Button_Clicked_1"/>
+            </HorizontalStackLayout>
+            
         </VerticalStackLayout>
         
     </VerticalStackLayout>

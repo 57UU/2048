@@ -29,6 +29,7 @@ public class Core2048
     }
     public void replay()
     {
+        score = 0;
         graph = new int[rowMax, columnMax];
         GenerateRandom();
         GenerateRandom();
